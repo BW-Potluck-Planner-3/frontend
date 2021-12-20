@@ -4,6 +4,7 @@ import { Link, Route } from 'react-router-dom';
 import axios from 'axios';
 import * as yup from 'yup';
 
+import Navbar from './components/Navbar';
 import UserLogin from './components/UserLogin';
 import loginSchema from './validate/LoginSchema';
 
@@ -71,14 +72,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        {/* Navbar */}
-        <nav className='navbar navbar-dark bg-dark d-flex justify-content-between'>
-          <Link to='/' className='navbar-brand'>Potluck Planner</Link>
-          <div className='nav-btn-group'>
-            <Link to='/login' className='btn btn-outline-primary'>Login</Link>
-            <Link to='/register' className='btn btn-outline-secondary'>Register</Link>
-          </div>
-        </nav>
+        <Navbar/>
       </header>
       {/* User login container */}
       <div className='container'>
