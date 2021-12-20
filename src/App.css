@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2%;
+}
+
 nav a, nav button {
   margin: 0 2%;
 }

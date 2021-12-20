@@ -50,18 +50,27 @@ function App() {
   return (
     <div className="App">
       <header>
+        {/* Navbar */}
         <nav className='navbar navbar-dark bg-dark d-flex justify-content-between'>
-          <a className='navbar-brand'>Potluck Planner</a>
+          <Link to='/' className='navbar-brand'>Potluck Planner</Link>
           <div className='nav-btn-group'>
-            <button className='btn btn-outline-primary'>Login</button>
-            <button className='btn btn-outline-secondary'>Register</button>
+            <Link to='/login' className='btn btn-outline-primary'>Login</Link>
+            <Link to='/register' className='btn btn-outline-secondary'>Register</Link>
           </div>
         </nav>
       </header>
-
-      <Route path='/login'>
-        <UserLogin values={loginValues} submit={loginSubmit} disabled={disabled} errors={loginErrors}/>
-      </Route>
+      {/* User login container */}
+      <div className='container'>
+        <Route path='/login'>
+          <UserLogin values={loginValues} submit={loginSubmit} disabled={disabled} errors={loginErrors}/>
+        </Route>
+      </div>
+      {/* Register container */}
+      <div className='container'>
+        <Route path='/register'>
+          
+        </Route>
+      </div>
     </div>
   );
 }
