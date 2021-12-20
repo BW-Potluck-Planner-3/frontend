@@ -28,7 +28,7 @@ function App() {
   const [disabled, setDisabled] = useState(initLoginDisabled);
 
   const postNewLogin = newLogin => {
-    axios.post('', newLogin)
+    axios.post('https://potluck-planner-3-ft.herokuapp.com/api/auth/login', newLogin)
       .then(res => {
         console.log(res);
       })
