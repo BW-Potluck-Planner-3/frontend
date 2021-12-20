@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import Navbar from './components/Navbar';
 import UserLogin from './components/UserLogin';
 import loginSchema from './validate/LoginSchema';
+import Footer from './components/Footer';
 
 // Initial States
 const initLoginValues = {
@@ -87,6 +88,8 @@ function App() {
       <Route path='/register'>
         
       </Route>
+      {/* Footer */}
+      <Footer/>
     </div>
   );
 }
