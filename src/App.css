@@ -28,3 +28,7 @@ nav a, nav button {
   margin: 2%;
   border-radius: 7px;
 }
+
+.footer-bottom {
+  background-color: rgba(0, 0, 0, 0.2);;
+}

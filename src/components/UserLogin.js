@@ -65,7 +65,7 @@ export default function UserLogin(props) {
               </div>
             </div>
             <div className='col'>
-              <a href='#'>Forgot Password?</a>
+              <Link to=''>Forgot Password?</Link>
             </div>
           </div>
           {/* Submit Button */}
