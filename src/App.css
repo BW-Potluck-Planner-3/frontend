@@ -2,6 +2,16 @@
   text-align: center;
 }
 
+nav a, nav button {
+  margin: 0 2%;
+}
+
+.nav-btn-group {
+  display: flex;
+  justify-content: center;
+  width: 20%;
+}
+
 .login-container {
   display: flex;
   justify-content: center;

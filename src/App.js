@@ -49,6 +49,16 @@ function App() {
 
   return (
     <div className="App">
+      <header>
+        <nav className='navbar navbar-dark bg-dark d-flex justify-content-between'>
+          <a className='navbar-brand'>Potluck Planner</a>
+          <div className='nav-btn-group'>
+            <button className='btn btn-outline-primary'>Login</button>
+            <button className='btn btn-outline-secondary'>Register</button>
+          </div>
+        </nav>
+      </header>
+
       <Route path='/login'>
         <UserLogin values={loginValues} submit={loginSubmit} disabled={disabled} errors={loginErrors}/>
       </Route>
