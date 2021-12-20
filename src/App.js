@@ -75,17 +75,18 @@ function App() {
         <Navbar/>
       </header>
       {/* User login container */}
-      <div className='container'>
-        <Route path='/login'>
-          <UserLogin values={loginValues} change={loginInputChange} submit={loginSubmit} disabled={disabled} errors={loginErrors}/>
-        </Route>
-      </div>
+      <Route path='/login'>
+        <UserLogin 
+          values={loginValues} 
+          change={loginInputChange} 
+          submit={loginSubmit} 
+          disabled={disabled} 
+          errors={loginErrors}/>
+      </Route>
       {/* Register container */}
-      <div className='container'>
-        <Route path='/register'>
-          
-        </Route>
-      </div>
+      <Route path='/register'>
+        
+      </Route>
     </div>
   );
 }
