@@ -2,8 +2,10 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Link, Route } from 'react-router-dom';
 import axios from 'axios';
+import * as yup from 'yup';
 
 import UserLogin from './components/UserLogin';
+import loginSchema from './validate/LoginSchema';
 
 // Initial States
 const initLoginValues = {
@@ -47,6 +49,25 @@ function App() {
     postNewLogin(newLogin);
   }
 
+  const validate = (name, value) => {
+    yup.reach(loginSchema, name)
+      .validate(value)
+      .then(() => setLoginErrors({ ...loginErrors, [name]: '' }))
+      .catch(err => setLoginErrors({ ...loginErrors, [name]: err.errors[0] }))
+  }
+
+  const loginInputChange = (name, value) => {
+    validate(name, value);
+    setLoginValues({
+      ...loginValues,
+      [name]: value
+    }) 
+  }
+
+  useEffect(() => {
+    loginSchema.isValid(loginValues).then(valid => setDisabled(!valid))
+  }, [loginValues]);
+
   return (
     <div className="App">
       <header>
@@ -62,7 +83,7 @@ function App() {
       {/* User login container */}
       <div className='container'>
         <Route path='/login'>
-          <UserLogin values={loginValues} submit={loginSubmit} disabled={disabled} errors={loginErrors}/>
+          <UserLogin values={loginValues} change={loginInputChange} submit={loginSubmit} disabled={disabled} errors={loginErrors}/>
         </Route>
       </div>
       {/* Register container */}
