@@ -74,7 +74,7 @@ function App() {
       <header>
         <Navbar/>
       </header>
-      {/* User login container */}
+      {/* User login */}
       <Route path='/login'>
         <UserLogin 
           values={loginValues} 
@@ -83,7 +83,7 @@ function App() {
           disabled={disabled} 
           errors={loginErrors}/>
       </Route>
-      {/* Register container */}
+      {/* Register form */}
       <Route path='/register'>
         
       </Route>
