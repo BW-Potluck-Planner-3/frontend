@@ -9,6 +9,12 @@
   margin: 2%;
 }
 
+.errors {
+  color: #c50000;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
 nav a, nav button {
   margin: 0 2%;
 }
