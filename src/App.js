@@ -90,7 +90,9 @@ function App() {
         
       </Route>
       {/* Landing Page Content */}
-      <LandingPage/>
+      <Route exact path='/'>
+        <LandingPage/>
+      </Route>
       {/* Footer */}
       <Footer/>
     </div>

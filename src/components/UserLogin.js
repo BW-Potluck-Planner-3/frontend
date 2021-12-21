@@ -47,6 +47,7 @@ export default function UserLogin(props) {
               id='passInput'
               value={values.password}
               onChange={onChange}
+              placeholder='Password'
             />
           </div>
           {/* 2 column grid layout */}
