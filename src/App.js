@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import Navbar from './components/Navbar';
 import UserLogin from './components/UserLogin';
 import loginSchema from './validate/LoginSchema';
+import LandingPage from './components/LandingPage';
 import Footer from './components/Footer';
 
 // Initial States
@@ -88,6 +89,8 @@ function App() {
       <Route path='/register'>
         
       </Route>
+      {/* Landing Page Body */}
+      <LandingPage/>
       {/* Footer */}
       <Footer/>
     </div>
