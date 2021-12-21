@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import axios from 'axios';
 import * as yup from 'yup';
 
@@ -89,8 +89,10 @@ function App() {
       <Route path='/register'>
         
       </Route>
-      {/* Landing Page Body */}
-      <LandingPage/>
+      {/* Landing Page Content */}
+      <Route exact path='/'>
+        <LandingPage/>
+      </Route>
       {/* Footer */}
       <Footer/>
     </div>
