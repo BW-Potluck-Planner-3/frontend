@@ -10,6 +10,7 @@ import RegisterForm from './components/RegisterForm';
 import loginSchema from './validate/LoginSchema';
 import regSchema from './validate/RegSchema';
 import LandingPage from './components/LandingPage';
+import Dashboard from './components/Dashboard';
 import Footer from './components/Footer';
 
 // Initial States
@@ -23,6 +24,15 @@ const initRegValues = {
   username: '',
   regPassword: '',
   confPassword: '',
+}
+
+const initPlValues = {
+  plTitle: '',
+  date: '',
+  time: '',
+  location: '',
+  dishes: '',
+  guests: '',
 }
 
 const initLoginErrors = {
@@ -43,6 +53,7 @@ const initRegDisabled = true;
 function App() {
   const [loginValues, setLoginValues] = useState(initLoginValues);
   const [registerValues, setRegisterValues] = useState(initRegValues);
+  const [plValues, setPlValues] = useState(initPlValues);
 
   const [loginErrors, setLoginErrors] = useState(initLoginErrors);
   const [regErrors, setRegErrors] = useState(initRegErrors);
@@ -75,6 +86,19 @@ function App() {
         setRegisterValues(initRegValues);
       })
   }
+
+  const postNewPl = newPl => {
+    axios.post('https://potluck-planner-3-ft.herokuapp.com/api/auth/login', newPl)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+      .finally(() => {
+        setPlValues(initPlValues);
+      })
+  }
   
   const loginSubmit = () => {
     const newLogin = {
@@ -92,6 +116,18 @@ function App() {
       confPassword: registerValues.confPassword,
     }
     postNewReg(newReg);
+  }
+
+  const plSubmit = () => {
+    const newPl = {
+      plTitle: plValues.plTitle.trim(),
+      date: plValues.date,
+      time: plValues.time,
+      location: plValues.location,
+      dishes: plValues.dishes,
+      guests: plValues.guests,
+    }
+    postNewPl(newPl);
   }
 
   const validate = (name, value) => {
@@ -120,6 +156,13 @@ function App() {
     regValidate(name, value);
     setRegisterValues({
       ...registerValues,
+      [name]: value
+    })
+  }
+
+  const plInputChange = (name, value) => {
+    setPlValues({
+      ...plValues,
       [name]: value
     })
   }
@@ -159,6 +202,14 @@ function App() {
       {/* Landing Page Content */}
       <Route exact path='/'>
         <LandingPage/>
+      </Route>
+      {/* User Dashboard */}
+      <Route path='/dashboard'>
+        <Dashboard 
+          values={plValues}
+          change={plInputChange}
+          submit={plSubmit}
+        />
       </Route>
       {/* Footer */}
       <Footer/>
