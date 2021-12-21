@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function UserLogin(props) {
-  const { values, change, submit, disabled, errors} = props;
+  const { values, change, submit, regDisabled, regErrors} = props;
 
   const onSubmit = evt => {
     evt.preventDefault();
@@ -21,12 +21,13 @@ export default function UserLogin(props) {
         <form onSubmit={onSubmit}>
           {/* Log In Errors */}
           <div className='errors'>
-            <div>{errors.username}</div>
-            <div>{errors.password}</div>
+            <div>{regErrors.username}</div>
+            <div>{regErrors.regPassword}</div>
+            <div>{regErrors.confPassword}</div>
           </div>
           {/* Username Input */}
           <div className='form-outline mb-4'>
-            <label className='form-label' for='usernameInput'>Enter a Username</label>
+            <label className='form-label' htmlFor='usernameInput'>Enter a Username</label>
             <input
               name='username' 
               type='text'
@@ -40,13 +41,13 @@ export default function UserLogin(props) {
           </div>
           {/* Password Input */}
           <div className='form-outline mb-4'>
-            <label className='form-label' for='passInput'>Enter a Password</label>
+            <label className='form-label' htmlFor='passInput'>Enter a Password</label>
             <input
-              name='password' 
+              name='regPassword' 
               type='password'
               className='form-control'
               id='passInput'
-              value={values.password}
+              value={values.regPassword}
               onChange={onChange}
               placeholder='Password'
             />
@@ -54,7 +55,7 @@ export default function UserLogin(props) {
           </div>
           {/* Confirm Password */}
           <div className='form-outline mb-4'>
-            <label className='form-label' for='confPassInput'>Confirm Password</label>
+            <label className='form-label' htmlFor='confPassInput'>Confirm Password</label>
             <input 
               name='confPassword'
               type='password'
@@ -66,7 +67,7 @@ export default function UserLogin(props) {
             />
           </div>
           {/* Submit Button */}
-          <button type='submit' disabled={disabled} className='btn btn-primary btn-block'>Create Account</button>
+          <button type='submit' disabled={regDisabled} className='btn btn-primary btn-block'>Create Account</button>
         </form>
       </div>
     </div>

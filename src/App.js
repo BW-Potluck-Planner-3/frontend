@@ -21,7 +21,7 @@ const initLoginValues = {
 
 const initRegValues = {
   username: '',
-  password: '',
+  regPassword: '',
   confPassword: '',
 }
 
@@ -33,7 +33,7 @@ const initLoginErrors = {
 
 const initRegErrors = {
   username: '',
-  password: '',
+  regPassword: '',
   confPassword: '',
 }
 
@@ -88,7 +88,7 @@ function App() {
   const regSubmit = () => {
     const newReg = {
       username: registerValues.username.trim(),
-      password: registerValues.password,
+      regPassword: registerValues.regPassword,
       confPassword: registerValues.confPassword,
     }
     postNewReg(newReg);
@@ -103,7 +103,7 @@ function App() {
 
   const regValidate = (name, value) => {
     yup.reach(regSchema, name)
-      .regValidate(value)
+      .validate(value)
       .then(() => setRegErrors({ ...regErrors, [name]: '' }))
       .catch(err => setRegErrors({ ...regErrors, [name]: err.errors[0] }))
   }
@@ -153,7 +153,7 @@ function App() {
           change={regInputChange}
           submit={regSubmit}
           disabled={regDisabled}
-          errors={regErrors}
+          regErrors={regErrors}
         />
       </Route>
       {/* Landing Page Content */}

@@ -6,14 +6,14 @@ const regSchema = yup.object().shape({
     .trim()
     .required('A username is required')
     .min(6, 'Your username must be at least 6 characters'),
-  password: yup
+  regPassword: yup
     .string()
     .required('A password is required')
     .min(8, 'Your password must be at least 8 charcters'),
   confPassword: yup
     .string()
     .required('Confirming your password is required')
-    .min(8, 'Your password length must match')
+    .oneOf([yup.ref('password'), null], 'Passwords must match')
 })
 
 export default regSchema;
