@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function UserLogin(props) {
   const { values, change, submit, regDisabled, regErrors} = props;
@@ -67,7 +68,9 @@ export default function UserLogin(props) {
             />
           </div>
           {/* Submit Button */}
-          <button type='submit' disabled={regDisabled} className='btn btn-primary btn-block'>Create Account</button>
+          <Link to='/dashboard'>
+            <button type='submit' disabled={regDisabled} className='btn btn-primary btn-block'>Create Account</button>
+          </Link>
         </form>
       </div>
     </div>

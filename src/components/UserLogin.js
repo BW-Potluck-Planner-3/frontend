@@ -70,7 +70,9 @@ export default function UserLogin(props) {
             </div>
           </div>
           {/* Submit Button */}
-          <button type='submit' disabled={disabled} className='btn btn-primary'>Sign In</button>
+          <Link to='/dashboard'>
+            <button type='submit' disabled={disabled} className='btn btn-primary'>Sign In</button>
+          </Link>
           {/* Register Link */}
           <div className='text-center'>
             <p>Not signed up? <Link to='/register'>Register Now</Link></p>
