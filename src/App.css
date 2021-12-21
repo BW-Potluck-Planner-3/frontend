@@ -97,8 +97,8 @@ nav a, nav button {
   margin-bottom: 2%;
 }
 
-.list-group-item:hover {
-  background-color: #d2ddff;
+.list-group {
+  line-height: 2.5;
 }
 
 .footer-bottom {
