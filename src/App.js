@@ -1,12 +1,13 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import axios from 'axios';
 import * as yup from 'yup';
 
 import Navbar from './components/Navbar';
 import UserLogin from './components/UserLogin';
 import loginSchema from './validate/LoginSchema';
+import LandingPage from './components/LandingPage';
 import Footer from './components/Footer';
 
 // Initial States
@@ -88,6 +89,8 @@ function App() {
       <Route path='/register'>
         
       </Route>
+      {/* Landing Page Content */}
+      <LandingPage/>
       {/* Footer */}
       <Footer/>
     </div>
