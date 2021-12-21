@@ -26,7 +26,7 @@ export default function UserLogin(props) {
           </div>
           {/* Username Input */}
           <div className='form-outline mb-4'>
-            <label className='form-label' for='usernameInput'>Username</label>
+            <label className='form-label' htmlFor='usernameInput'>Username</label>
             <input
               name='username' 
               type='text'
@@ -39,7 +39,7 @@ export default function UserLogin(props) {
           </div>
           {/* Password Input */}
           <div className='form-outline mb-4'>
-            <label className='form-label' for='passInput'>Password</label>
+            <label className='form-label' htmlFor='passInput'>Password</label>
             <input
               name='password' 
               type='password'
@@ -62,7 +62,7 @@ export default function UserLogin(props) {
                   id='rememberCheck'
                   onChange={onChange}
                 />
-                <label className='form-check-label' for='rememberCheck'> Remember Me </label>
+                <label className='form-check-label' htmlFor='rememberCheck'> Remember Me </label>
               </div>
             </div>
             <div className='col'>
