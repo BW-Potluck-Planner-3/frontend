@@ -33,7 +33,7 @@ const Potlucks = (props) => {
           <div className='potluck-wrapper shadow-lg bg-light'>
             {/* Potluck details */}
             <div key={p.potluck_id}> 
-              <h3>{p.potluck_name}</h3> <br></br>
+              <h3 className='text-primary'>{p.potluck_name}</h3> <br></br>
               Location: {p.location} <br></br>
               {p.date} <br></br>
               {p.time} <br></br>
