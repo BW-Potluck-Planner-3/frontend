@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default function UserLogin(props) {
+function RegisterForm(props) {
   const { values, change, submit, regDisabled, regErrors} = props;
 
   const onSubmit = evt => {
@@ -22,8 +23,8 @@ export default function UserLogin(props) {
           {/* Log In Errors */}
           <div className='errors'>
             <div>{regErrors.username}</div>
-            <div>{regErrors.regPassword}</div>
-            <div>{regErrors.confPassword}</div>
+            <div>{regErrors.password}</div>
+            <div>{props.error}</div>
           </div>
           {/* Username Input */}
           <div className='form-outline mb-4'>
@@ -43,29 +44,18 @@ export default function UserLogin(props) {
           <div className='form-outline mb-4'>
             <label className='form-label' htmlFor='passInput'>Enter a Password</label>
             <input
-              name='regPassword' 
+              name='password' 
               type='password'
               className='form-control'
               id='passInput'
-              value={values.regPassword}
+              value={values.password}
               onChange={onChange}
               placeholder='Password'
             />
             <p className='form-description'>Password must be at least 8 characters.</p>
           </div>
           {/* Confirm Password */}
-          <div className='form-outline mb-4'>
-            <label className='form-label' htmlFor='confPassInput'>Confirm Password</label>
-            <input 
-              name='confPassword'
-              type='password'
-              className='form-control'
-              id='confPassInput'
-              value={values.confPassword}
-              onChange={onChange}
-              placeholder='Confirm Password'
-            />
-          </div>
+          
           {/* Submit Button */}
           <button type='submit' disabled={regDisabled} className='btn btn-primary btn-block'>Create Account</button>
         </form>
@@ -74,3 +64,11 @@ export default function UserLogin(props) {
   )
 
 }
+
+const mapStateToProps = (state) => {
+  return ({
+      error: state.errorMessage
+  })
+}
+
+export default connect(mapStateToProps)(RegisterForm);

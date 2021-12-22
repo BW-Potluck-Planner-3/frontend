@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default function UserLogin(props) {
+
+function UserLogin(props) {
   const { values, change, submit, disabled, errors} = props;
 
   const onSubmit = evt => {
@@ -17,12 +19,14 @@ export default function UserLogin(props) {
 
   return (
     <div className='container'>
-      <div className='login-container shadow-lg'>
+      <div className='login-container shadow-lg d-flex flex-column'>
+        <h1 className='loginDiff'>Login To Your Account</h1>
         <form onSubmit={onSubmit}>
           {/* Log In Errors */}
           <div className='errors'>
             <div>{errors.username}</div>
             <div>{errors.password}</div>
+            <div>{props.error}</div>
           </div>
           {/* Username Input */}
           <div className='form-outline mb-4'>
@@ -72,6 +76,8 @@ export default function UserLogin(props) {
           {/* Submit Button */}
           <button type='submit' disabled={disabled} className='btn btn-primary'>Sign In</button>
           {/* Register Link */}
+          <br></br>
+          <br></br>
           <div className='text-center'>
             <p>Not signed up? <Link to='/register'>Register Now</Link></p>
           </div>
@@ -81,3 +87,12 @@ export default function UserLogin(props) {
   )
 
 }
+
+
+const mapStateToProps = (state) => {
+  return ({
+      error: state.errorMessage
+  })
+}
+
+export default connect(mapStateToProps)(UserLogin);
