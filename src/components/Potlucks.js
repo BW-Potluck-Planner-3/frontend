@@ -43,24 +43,26 @@ const Potlucks = (props) => {
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Add a Guest</Accordion.Header>
                   <Accordion.Body>
-                    <form>
+                    <form className='d-flex justify-content-center align-items-center'>
                       <input 
                         name='guest'
                         type='text'
                         placeholder='Guest Name'
                       />
+                      <button className="btn btn-outline-primary btn-sm ml-1">Add</button>
                     </form>
                   </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
                   <Accordion.Header>Add a Menu Item</Accordion.Header>
                   <Accordion.Body>
-                    <form>
+                    <form className='d-flex justify-content-center align-items-center'>
                       <input 
                         name='menuItem'
                         type='text'
                         placeholder='Name of Menu Item'
                       />
+                      <button className="btn btn-outline-primary btn-sm ml-1">Add</button>
                     </form>
                   </Accordion.Body>
                 </Accordion.Item>
