@@ -3,6 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 import * as yup from 'yup';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+
+import { registerUser, loginUser, newPotluck } from './actions';
+import axiosWithAuth from './utils/axiosWithAuth';
 
 import Navbar from './components/Navbar';
 import UserLogin from './components/UserLogin';
@@ -11,18 +17,19 @@ import loginSchema from './validate/LoginSchema';
 import regSchema from './validate/RegSchema';
 import LandingPage from './components/LandingPage';
 import Footer from './components/Footer';
+import PrivateRoute from './components/PrivateRoute';
+import Potlucks from './components/Potlucks';
+import PotluckForm from './components/PotluckForm';
 
 // Initial States
 const initLoginValues = {
   username: '',
-  password: '',
-  remember: false,
+  password: ''
 }
 
 const initRegValues = {
   username: '',
-  regPassword: '',
-  confPassword: '',
+  password: '',
 }
 
 const initLoginErrors = {
@@ -33,16 +40,28 @@ const initLoginErrors = {
 
 const initRegErrors = {
   username: '',
-  regPassword: '',
-  confPassword: '',
+  password: '',
+}
+
+const initPlValues = {
+  potluck_name: '',
+  date: '',
+  time: '',
+  location: '',
 }
 
 const initLoginDisabled = true;
 const initRegDisabled = true;
 
-function App() {
+function App(props) {
+
+  const { push } = useHistory();
+
+  const token = localStorage.getItem('token');
+
   const [loginValues, setLoginValues] = useState(initLoginValues);
   const [registerValues, setRegisterValues] = useState(initRegValues);
+  const [plValues, setPlValues] = useState(initPlValues);
 
   const [loginErrors, setLoginErrors] = useState(initLoginErrors);
   const [regErrors, setRegErrors] = useState(initRegErrors);
@@ -50,49 +69,53 @@ function App() {
   const [disabled, setDisabled] = useState(initLoginDisabled);
   const [regDisabled, setRegDisabled] = useState(initRegDisabled);
 
-  const postNewLogin = newLogin => {
-    axios.post('https://potluck-planner-3-ft.herokuapp.com/api/auth/login', newLogin)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.error(err);
-      })
-      .finally(() => {
-        setLoginValues(initLoginValues);
-      })
+
+  let loggedInName = "";
+  let message = localStorage.getItem("message");
+  if (message) {
+    loggedInName = message.split(" ")[2];
+  } else {
+    loggedInName = "";
   }
 
-  const postNewReg = newReg => {
-    axios.post('https://potluck-planner-3-ft.herokuapp.com/api/auth/login', newReg)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.error(err);
-      })
-      .finally(() => {
-        setRegisterValues(initRegValues);
-      })
-  }
-  
+
   const loginSubmit = () => {
-    const newLogin = {
+    const loginCredentials = {
       username: loginValues.username.trim(),
-      password: loginValues.password,
-      remember: loginValues.remember,
+      password: loginValues.password
     }
-    postNewLogin(newLogin);
+    props.loginUser(loginCredentials);
+    
   }
+
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("message");
+    push("/");
+    window.location.reload(true);
+  }
+
 
   const regSubmit = () => {
     const newReg = {
       username: registerValues.username.trim(),
-      regPassword: registerValues.regPassword,
-      confPassword: registerValues.confPassword,
+      password: registerValues.password
     }
-    postNewReg(newReg);
+    props.registerUser(newReg);
+    
   }
+
+  const plSubmit = () => {
+    const newPl = {
+      potluck_name: plValues.plTitle.trim(),
+      date: plValues.date,
+      time: plValues.time,
+      location: plValues.location
+    }
+    props.newPotluck(newPl);
+
+  }
+
 
   const validate = (name, value) => {
     yup.reach(loginSchema, name)
@@ -124,6 +147,15 @@ function App() {
     })
   }
 
+  const plInputChange = (name, value) => {
+    setPlValues({
+      ...plValues,
+      [name]: value
+    })
+  }
+
+  
+
   useEffect(() => {
     loginSchema.isValid(loginValues).then(valid => setDisabled(!valid))
   }, [loginValues]);
@@ -135,7 +167,9 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Navbar/>
+        <Navbar
+        logout={logoutHandler}
+        name={loggedInName}/>
       </header>
       {/* User login */}
       <Route path='/login'>
@@ -158,12 +192,42 @@ function App() {
       </Route>
       {/* Landing Page Content */}
       <Route exact path='/'>
-        <LandingPage/>
+        <LandingPage
+        name={loggedInName}/>
       </Route>
+       {/* User Dashboard */}
+       <PrivateRoute 
+       path='/potluckform' 
+       component={PotluckForm}
+       data={{
+         values:plValues,
+         change:plInputChange,
+         submit:plSubmit
+       }}> 
+       </PrivateRoute>
+       <PrivateRoute 
+       path='/potlucks' 
+       component={Potlucks}
+       data={{
+         logout:logoutHandler,
+         name:loggedInName
+       }}> 
+       </PrivateRoute>
+       
+     
       {/* Footer */}
-      <Footer/>
+      <Footer
+      logout={logoutHandler}
+      name={loggedInName}/>
     </div>
   );
 }
 
-export default App;
+const mapActionsToProps = {
+  registerUser,
+  loginUser, 
+  newPotluck
+}
+
+
+export default connect(null, mapActionsToProps)(App);
