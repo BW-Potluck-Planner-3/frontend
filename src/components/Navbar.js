@@ -11,7 +11,7 @@ export default function Navbar(props) {
 
       {(token ? <Link to='/' className='navbar-brand'>Welcome Back <span className='userHighlight'>{props.name.slice(0, -1)}</span>!</Link>
         :
-        <Link to='#' className='navbar-brand'>Potluck Planner</Link>
+        <Link to='/' className='navbar-brand'>Potluck Planner</Link>
         )}
       
       <div className='nav-btn-group'>
