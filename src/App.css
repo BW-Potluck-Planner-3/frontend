@@ -148,3 +148,21 @@ h1.userS {
 .loginDiff {
   color: darkcyan;
 }
+
+.potluck-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3% 5%;
+  margin: 3% auto;
+  width: 50%;
+}
+
+.potluck-acc-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+}
