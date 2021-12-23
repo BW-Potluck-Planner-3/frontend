@@ -7,7 +7,7 @@ export default function Footer(props) {
 
   return (
     <footer className='text-center text-white bg-dark'>
-      <div className='container p-4 pb-0'>
+      <div className='container p-4 pb-0 m-0'>
         {(token ? 
         <section>
         <p className='d-flex justify-content-center align-items-center'>
